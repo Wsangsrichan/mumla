@@ -158,6 +158,21 @@ public class Settings {
 
     public static final String PREF_NEWS_SHOWN_VERSIONS = "newsShownVersions";
 
+    public static final String PREF_GPS_TRACKING_ENABLED = "gpsTrackingEnabled";
+    public static final boolean DEFAULT_GPS_TRACKING_ENABLED = false;
+
+    public static final String PREF_TRACCAR_URL = "traccarUrl";
+    public static final String DEFAULT_TRACCAR_URL = "";
+
+    public static final String PREF_TRACCAR_DEVICE_ID = "traccarDeviceId";
+    public static final String DEFAULT_TRACCAR_DEVICE_ID = "";
+
+    public static final String PREF_GPS_UPDATE_INTERVAL = "gpsUpdateInterval";
+    public static final String DEFAULT_GPS_UPDATE_INTERVAL = "60";
+
+    public static final String PREF_GPS_MIN_DISTANCE = "gpsMinDistance";
+    public static final String DEFAULT_GPS_MIN_DISTANCE = "10";
+
     static {
         ARRAY_INPUT_METHODS = new HashSet<String>();
         ARRAY_INPUT_METHODS.add(ARRAY_INPUT_METHOD_VOICE);
@@ -409,6 +424,26 @@ public class Settings {
         if (shownVersions.addAll(versions)) {
             preferences.edit().putStringSet(PREF_NEWS_SHOWN_VERSIONS, shownVersions).apply();
         }
+    }
+
+    public boolean isGpsTrackingEnabled() {
+        return preferences.getBoolean(PREF_GPS_TRACKING_ENABLED, DEFAULT_GPS_TRACKING_ENABLED);
+    }
+
+    public String getTraccarUrl() {
+        return preferences.getString(PREF_TRACCAR_URL, DEFAULT_TRACCAR_URL);
+    }
+
+    public String getTraccarDeviceId() {
+        return preferences.getString(PREF_TRACCAR_DEVICE_ID, DEFAULT_TRACCAR_DEVICE_ID);
+    }
+
+    public int getGpsUpdateInterval() {
+        return Integer.parseInt(preferences.getString(PREF_GPS_UPDATE_INTERVAL, DEFAULT_GPS_UPDATE_INTERVAL));
+    }
+
+    public int getGpsMinDistance() {
+        return Integer.parseInt(preferences.getString(PREF_GPS_MIN_DISTANCE, DEFAULT_GPS_MIN_DISTANCE));
     }
 
     public void resetNewsShownVersion() {

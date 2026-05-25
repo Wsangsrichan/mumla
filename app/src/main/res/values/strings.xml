@@ -238,4 +238,17 @@
 
     <!-- Used only by flavor "foss" -->
     <string name="donate_foss">Donate</string>
+
+    <!-- GPS Tracking -->
+    <string name="pref_gps_tracking_category">GPS Tracking</string>
+    <string name="pref_gps_tracking_enabled">Enable GPS tracking</string>
+    <string name="pref_gps_tracking_enabled_sum">Send location updates to a Traccar server</string>
+    <string name="pref_traccar_url">Traccar server URL</string>
+    <string name="pref_traccar_url_sum">e.g. https://traccar.example.com</string>
+    <string name="pref_traccar_device_id">Device ID</string>
+    <string name="pref_traccar_device_id_sum">Unique identifier for this device on Traccar</string>
+    <string name="pref_gps_update_interval">Update interval (seconds)</string>
+    <string name="pref_gps_update_interval_sum">How often to send location updates</string>
+    <string name="pref_gps_min_distance">Minimum distance (meters)</string>
+    <string name="pref_gps_min_distance_sum">Minimum distance before sending an update</string>
 </resources>

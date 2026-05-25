@@ -91,6 +91,8 @@ public class MumlaService extends HumlaService implements
     private List<IChatMessage> mMessageLog;
     private boolean mSuppressNotifications;
 
+    private GpsTracker mGpsTracker;
+
     private TextToSpeech mTTS;
     private TextToSpeech.OnInitListener mTTSInitListener = new TextToSpeech.OnInitListener() {
         @Override
@@ -316,6 +318,9 @@ public class MumlaService extends HumlaService implements
             mTTS = new TextToSpeech(this, mTTSInitListener);
 
         mTalkReceiver = new TalkBroadcastReceiver(this);
+
+        mGpsTracker = new GpsTracker(this, mSettings);
+        mGpsTracker.start();
     }
 
     @Override
@@ -344,6 +349,7 @@ public class MumlaService extends HumlaService implements
 
         unregisterObserver(mObserver);
         if(mTTS != null) mTTS.shutdown();
+        mGpsTracker.stop();
         mMessageLog = null;
         mMessageNotification.dismiss();
         super.onDestroy();
@@ -479,6 +485,13 @@ public class MumlaService extends HumlaService implements
             case Settings.PREF_DISABLE_OPUS:
                 // These are settings we flag as 'requiring reconnect'.
                 requiresReconnect = true;
+                break;
+            case Settings.PREF_GPS_TRACKING_ENABLED:
+            case Settings.PREF_TRACCAR_URL:
+            case Settings.PREF_TRACCAR_DEVICE_ID:
+            case Settings.PREF_GPS_UPDATE_INTERVAL:
+            case Settings.PREF_GPS_MIN_DISTANCE:
+                mGpsTracker.restartIfEnabled();
                 break;
         }
         if (changedExtras.size() > 0) {

@@ -83,4 +83,49 @@
         android:summary="@string/pref_start_upIn_pinned_mode_sum"
         android:title="@string/pref_start_up_in_pinned_mode"
         app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:title="@string/pref_gps_tracking_category"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="gpsTrackingEnabled"
+            android:summary="@string/pref_gps_tracking_enabled_sum"
+            android:title="@string/pref_gps_tracking_enabled"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="traccarUrl"
+            android:title="@string/pref_traccar_url"
+            android:summary="@string/pref_traccar_url_sum"
+            android:dialogTitle="@string/pref_traccar_url"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="traccarDeviceId"
+            android:title="@string/pref_traccar_device_id"
+            android:summary="@string/pref_traccar_device_id_sum"
+            android:dialogTitle="@string/pref_traccar_device_id"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:defaultValue="60"
+            android:key="gpsUpdateInterval"
+            android:title="@string/pref_gps_update_interval"
+            android:summary="@string/pref_gps_update_interval_sum"
+            android:dialogTitle="@string/pref_gps_update_interval"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:defaultValue="10"
+            android:key="gpsMinDistance"
+            android:title="@string/pref_gps_min_distance"
+            android:summary="@string/pref_gps_min_distance_sum"
+            android:dialogTitle="@string/pref_gps_min_distance"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

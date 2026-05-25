@@ -130,6 +130,7 @@ public class MumlaActivity extends AppCompatActivity implements ListView.OnItemC
 
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
     private static final int PERMISSIONS_REQUEST_POST_NOTIFICATIONS = 2;
+    private static final int PERMISSIONS_REQUEST_LOCATION = 3;
     private Server mServerPendingPerm = null;
     private boolean mPermPostNotificationsAsked = false;
 
@@ -581,6 +582,20 @@ public class MumlaActivity extends AppCompatActivity implements ListView.OnItemC
             }
         }
 
+        if (mSettings.isGpsTrackingEnabled()) {
+            if (ContextCompat.checkSelfPermission(MumlaActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MumlaActivity.this,
+                        new String[]{
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                        },
+                        PERMISSIONS_REQUEST_LOCATION);
+                return;
+            }
+        }
+
         if (mServerPendingPerm == null) {
             Log.w(TAG, "No pending server after getting permissions");
             return;
@@ -662,6 +677,15 @@ public class MumlaActivity extends AppCompatActivity implements ListView.OnItemC
                     }
                 }
                 connectToServerWithPerm();
+                break;
+            case PERMISSIONS_REQUEST_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    connectToServerWithPerm();
+                } else {
+                    Toast.makeText(MumlaActivity.this,
+                            "Location permission required for GPS tracking",
+                            Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
