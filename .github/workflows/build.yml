@@ -27,6 +27,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Build spongycastle JARs (humla dependency)
+        run: ./gradlew -p libraries/humla/libs/humla-spongycastle jar
+
       - name: Build debug APK
         run: ./gradlew assembleDebug
 
